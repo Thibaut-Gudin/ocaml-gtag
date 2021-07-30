@@ -1,0 +1,12 @@
+(rule
+ (targets gtag.ml)
+ (deps gtag.mli)
+ (action (run %{bin:gen_js_api} %{deps})))
+
+(library
+ (public_name gtag)
+ (name gtag)
+ (modes byte)
+ (libraries gen_js_api js_of_ocaml js_of_ocaml-ppx)
+ (preprocess (pps js_of_ocaml-ppx))
+)
